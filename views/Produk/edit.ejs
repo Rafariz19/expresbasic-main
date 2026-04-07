@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0"><%= title %></h5>
+                </div>
+                <div class="card-body">
+                    <form action="/produk/update/<%= id_produk %>" method="POST">
+                        <div class="mb-3">
+                            <label for="nama_produk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<%= nama_produk %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="harga_produk" class="form-label">Harga</label>
+                            <input type="number" class="form-control" id="harga_produk" name="harga_produk" value="<%= harga_produk %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_kategori" class="form-label">Kategori</label>
+                            <input type="number" class="form-control" id="id_kategori" name="id_kategori" value="<%= id_kategori %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar_produk" class="form-label">Gambar Produk</label>
+                            <input type="text" class="form-control" id="gambar_produk" name="gambar_produk" value="<%= gambar_produk %>">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="/produk" class="btn btn-secondary">Kembali</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
