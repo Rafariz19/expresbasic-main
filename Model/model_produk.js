@@ -4,7 +4,7 @@ class model_produk {
 
     static async getAll(){
         return new Promise((resolve, reject) => {
-            connection.query('select * from produk2 order by id_produk desc', (err, rows) => {
+            connection.query('select p.*, k.nama_kategori from produk2 p left join kategori2 k on p.id_kategori = k.id_produk order by p.id_produk desc', (err, rows) => {
                 if (err){
                     reject(err);
                 }else{
