@@ -46,7 +46,13 @@
                                 <td class="text-start"><%= data[i].nama_produk %></td>
                                 <td><%= data[i].harga_produk %></td>
                                 <td><%= data[i].id_kategori %></td>
-                                <td><%= data[i].gambar_produk %></td>
+                                <td>
+                                    <% if (data[i].gambar_produk) { %>
+                                        <img src="<%= data[i].gambar_produk %>" alt="Gambar Produk" class="img-fluid" style="max-height:80px; max-width:80px; object-fit:cover;">
+                                    <% } else { %>
+                                        <span class="text-muted">Tidak ada</span>
+                                    <% } %>
+                                </td>
                                 <td>
                                     <a href="/produk/edit/<%= data[i].id_produk %>" 
                                        class="btn btn-sm btn-warning me-1">

@@ -5,7 +5,7 @@ class model_kategori {
     // Method untuk mendapatkan semua data kategori
     static async getAll(){
         return new Promise((resolve, reject) => {
-            connection.query('select * from kategori order by id_kategori desc', (err, rows) => {
+            connection.query('select id_produk AS id_kategori, nama_kategori from kategori2 order by id_produk desc', (err, rows) => {
                 if (err){
                     reject(err);
                 }else{
@@ -17,7 +17,7 @@ class model_kategori {
 
     static async Store(Data){
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO kategori SET ?', Data, function (err, result) {
+            connection.query('INSERT INTO kategori2 SET ?', Data, function (err, result) {
                 if (err){
                     reject(err);
                 }else{
@@ -29,7 +29,7 @@ class model_kategori {
 
     static async getid(id){
         return new Promise((resolve, reject) => {
-            connection.query('select * from kategori where id_kategori = ' + id, (err, rows) =>  {
+            connection.query('select id_produk AS id_kategori, nama_kategori from kategori2 where id_produk = ?', [id], (err, rows) =>  {
                 if (err){
                     reject(err);
                 }else{
@@ -41,7 +41,7 @@ class model_kategori {
 
     static async update(id, Data){
         return new Promise((resolve, reject) => {
-            connection.query('update kategori set ? where id_kategori = '+ id, Data, function (err, result) {
+            connection.query('update kategori2 set ? where id_produk = ?', [Data, id], function (err, result) {
                 if (err){
                     reject(err);
                 }else{
@@ -53,7 +53,7 @@ class model_kategori {
 
     static async delete(id){
         return new Promise((resolve, reject) => {
-            connection.query('delete from kategori where id_kategori = '+ id, function (err, result) {
+            connection.query('delete from kategori2 where id_produk = ?', [id], function (err, result) {
                 if (err){
                     reject(err);
                 }else{

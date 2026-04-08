@@ -4,7 +4,7 @@ class model_produk {
 
     static async getAll(){
         return new Promise((resolve, reject) => {
-            connection.query('select * from produk order by id_produk desc', (err, rows) => {
+            connection.query('select * from produk2 order by id_produk desc', (err, rows) => {
                 if (err){
                     reject(err);
                 }else{
@@ -16,7 +16,7 @@ class model_produk {
 
     static async Store(Data){
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO produk SET ?', Data, function (err, result) {
+            connection.query('INSERT INTO produk2 SET ?', Data, function (err, result) {
                 if (err){
                     reject(err);
                 }else{
@@ -28,7 +28,7 @@ class model_produk {
 
     static async getid(id){
         return new Promise((resolve, reject) => {
-            connection.query('select * from produk where id_produk = ' + id, (err, rows) =>  {
+            connection.query('select * from produk2 where id_produk = ?', [id], (err, rows) =>  {
                 if (err){
                     reject(err);
                 }else{
@@ -40,7 +40,7 @@ class model_produk {
 
     static async update(id, Data){
         return new Promise((resolve, reject) => {
-            connection.query('update produk set ? where id_produk = '+ id, Data, function (err, result) {
+            connection.query('update produk2 set ? where id_produk = ?', [Data, id], function (err, result) {
                 if (err){
                     reject(err);
                 }else{
@@ -52,7 +52,7 @@ class model_produk {
 
     static async delete(id){
         return new Promise((resolve, reject) => {
-            connection.query('delete from produk where id_produk = '+ id, function (err, result) {
+            connection.query('delete from produk2 where id_produk = ?', [id], function (err, result) {
                 if (err){
                     reject(err);
                 }else{

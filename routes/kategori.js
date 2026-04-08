@@ -33,16 +33,14 @@ router.get('/edit/(:id)', async function(req, res, next) {
 
 // Delete kategori
 router.get('/delete/(:id)', async function(req, res){
-  let id = req.params.id;
-  await model_kategori.delete(id);
-  connection.query('delete from kategori where id_kategori =' + id,function(err){
-  if (err) {
-    req.flash('error', 'Gagal menghapus data');
-  }else{
+  try {
+    let id = req.params.id;
+    await model_kategori.delete(id);
     req.flash('success','Data terhapus!');
+  } catch (error) {
+    req.flash('error', 'Gagal menghapus data');
   }
   res.redirect('/kategori');
-})
 });
 
 // POST store kategori
