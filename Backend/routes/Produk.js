@@ -38,7 +38,7 @@ router.get("/", async function (req, res, next) {
       return {
         no: row.id_produk,
         nama: row.nama_produk,
-        harga: row.harga_produk,
+        harga: row.harga,
         kategori: row.nama_kategori || "-",
         foto: row.gambar_produk ? "/uploads/" + row.gambar_produk : null,
       };
@@ -85,7 +85,7 @@ router.get("/create", async function (req, res, next) {
 router.post("/store", upload.single("gambar_produk"), async function (req, res, next) {
   try {
     let { nama_produk, harga_produk, id_kategori } = req.body;
-    let Data = { nama_produk, harga_produk, id_kategori };
+    let Data = { nama_produk, harga: harga_produk, id_kategori };
     if (req.file) {
       Data.gambar_produk = req.file.filename;
     }
@@ -114,7 +114,7 @@ router.get("/edit/:no", async function (req, res, next) {
       title: "Edit Produk",
       id_produk: rows[0].id_produk,
       nama_produk: rows[0].nama_produk,
-      harga_produk: rows[0].harga_produk,
+      harga_produk: rows[0].harga,
       id_kategori: rows[0].id_kategori,
       kategori: categories,
       gambar_produk: rows[0].gambar_produk ? "/uploads/" + rows[0].gambar_produk : null,
@@ -131,7 +131,7 @@ router.post("/update/:no", upload.single("gambar_produk"), async function (req, 
   try {
     let id = req.params.no;
     let { nama_produk, harga_produk, id_kategori } = req.body;
-    let Data = { nama_produk, harga_produk, id_kategori };
+    let Data = { nama_produk, harga: harga_produk, id_kategori };
 
     let productRows = await model_produk.getid(id);
     if (productRows.length <= 0) {
@@ -171,7 +171,7 @@ router.get("/delete/:no", async function (req, res, next) {
       title: "Hapus Produk",
       id_produk: rows[0].id_produk,
       nama_produk: rows[0].nama_produk,
-      harga_produk: rows[0].harga_produk,
+      harga_produk: rows[0].harga,
       id_kategori: rows[0].id_kategori,
       gambar_produk: rows[0].gambar_produk ? "/uploads/" + rows[0].gambar_produk : null,
     });

@@ -1,86 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h5 class="mb-0"><%= title %></h5>
-                </div>
-                <div class="card-body">
-                    <form action="/produk/update/<%= id_produk %>" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="current_gambar_produk" value="<%= gambar_produk %>">
-                        <div class="mb-3">
-                            <label for="nama_produk" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<%= nama_produk %>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="harga_produk" class="form-label">Harga</label>
-                            <input type="number" class="form-control" id="harga_produk" name="harga_produk" value="<%= harga_produk %>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="id_kategori" class="form-label">Kategori</label>
-                            <input list="kategori-list" type="text" class="form-control" id="id_kategori" name="id_kategori" value="<%= id_kategori %>" placeholder="Ketik atau pilih kategori" required>
-                            <datalist id="kategori-list">
-                                <% kategori.forEach(function(kat) { %>
-                                    <option value="<%= kat.nama_kategori %>"></option>
-                                <% }); %>
-                            </datalist>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gambar_produk" class="form-label">Gambar Produk</label>
-                            <input type="file" class="form-control" id="gambar_produk" name="gambar_produk" accept="image/*">
-                            <div class="form-text">Biarkan kosong untuk mempertahankan gambar saat ini.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Preview Gambar</label>
-                            <div class="border rounded p-2 text-center">
-                                    <img id="preview-gambar" src="<%= gambar_produk %>" alt="Preview Gambar" class="img-fluid" style="max-height: 250px"; <%= gambar_produk ? 'display:block;' : 'display:none;' %>">
-                                    <p id="preview-placeholder" class="text-muted mb-0" style="max-height: 250px;"" <%= gambar_produk ? 'display:none;' : 'display:block;' %>">
-                                        <%= gambar_produk ? 'Gambar saat ini ditampilkan.' : 'Belum memilih gambar' %>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="/produk" class="btn btn-secondary">Kembali</a>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<%- include('../partials/_head.ejs') %>
+<%- include('../partials/_message.ejs')%>
+
+<div class="mb-4">
+  <h4 class="fw-bold mb-0" style="font-size: 20px;"><%= title %></h4>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<div class="card" style="max-width: 640px;">
+  <div class="card-body">
+    <form action="/produk/update/<%= id_produk %>" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="nama_produk" class="form-label">Nama Produk</label>
+        <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<%= nama_produk %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="harga_produk" class="form-label">Harga</label>
+        <input type="number" class="form-control" id="harga_produk" name="harga_produk" value="<%= harga_produk %>" required>
+      </div>
+      <div class="mb-3">
+        <label for="id_kategori" class="form-label">Kategori</label>
+        <select class="form-select" id="id_kategori" name="id_kategori" required>
+          <option value="">-- Pilih Kategori --</option>
+          <% kategori.forEach(function(kat) { %>
+            <option value="<%= kat.id_kategori %>" <%= id_kategori == kat.id_kategori ? 'selected' : '' %>><%= kat.nama_kategori %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="gambar_produk" class="form-label">Gambar Produk</label>
+        <input type="file" class="form-control" id="gambar_produk" name="gambar_produk" accept="image/*">
+        <div class="form-text mt-1">Biarkan kosong untuk mempertahankan gambar saat ini.</div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Preview</label>
+        <div class="border rounded p-3 text-center bg-light">
+          <% if (gambar_produk) { %>
+            <img id="preview-gambar" src="<%= gambar_produk %>" alt="Preview" class="img-fluid" style="max-height: 220px; display: block;">
+            <p id="preview-placeholder" class="text-muted mb-0" style="font-size: 13px; display: none;">Belum memilih gambar</p>
+          <% } else { %>
+            <img id="preview-gambar" src="" alt="Preview" class="img-fluid" style="max-height: 220px; display: none;">
+            <p id="preview-placeholder" class="text-muted mb-0" style="font-size: 13px;">Belum memilih gambar</p>
+          <% } %>
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="/produk" class="btn btn-outline-primary flex-fill">Kembali</a>
+        <button type="submit" class="btn btn-primary flex-fill">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
-    const editInput = document.getElementById('gambar_produk');
-    const editPreview = document.getElementById('preview-gambar');
-    const editPlaceholder = document.getElementById('preview-placeholder');
-
+  const editInput = document.getElementById('gambar_produk');
+  if (editInput) {
     editInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (!file) {
-            editPlaceholder.style.display = editPreview.src ? 'none' : 'block';
-            return;
+      const file = this.files[0];
+      const preview = document.getElementById('preview-gambar');
+      const placeholder = document.getElementById('preview-placeholder');
+      if (!file) {
+        if (preview && preview.src) {
+          placeholder.style.display = 'none';
+        } else {
+          placeholder.style.display = 'block';
         }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            editPreview.src = e.target.result;
-            editPreview.style.display = 'block';
-            editPlaceholder.style.display = 'none';
-        };
-        reader.readAsDataURL(file);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
     });
+  }
 </script>
-</body>
-</html>
+<%- include('../partials/_foot.ejs') %>

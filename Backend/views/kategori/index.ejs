@@ -1,57 +1,47 @@
 <%- include('../partials/_head.ejs')%>
-<div class="container mt-5">
-    <!-- Alert -->
 <%- include('../partials/_message.ejs')%>
 
-    <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Kategori</h5>
-            <a href="/kategori/create" class="btn btn-sm btn-success">
-                + Tambah Kategori
-            </a>
-        </div>
-
-        <div class="card-body p-0">
-            <table class="table table-hover table-striped mb-0 text-center align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Nama Kategori</th>
-                        <th width="200">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (data.length) { %>
-                        <% for (var i = 0; i < data.length; i++) { %>
-                            <tr>
-                                <td><%= i + 1 %></td>
-                                <td class="text-start"><%= data[i].nama_kategori %></td>
-                                <td>
-                                    <a href="/kategori/edit/<%= data[i].id_kategori %>" 
-                                       class="btn btn-sm btn-warning me-1">
-                                        Edit
-                                    </a>
-                                    <a href="/kategori/delete/<%= data[i].id_kategori %>" 
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        <% } %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="3" class="text-muted py-4">
-                                Data kategori belum tersedia
-                            </td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold mb-0" style="font-size: 20px;">Kategori</h4>
+  <a href="/kategori/create" class="btn btn-success btn-sm">+ Tambah Kategori</a>
 </div>
 
-<!-- Bootstrap JS -->
+<div class="card index-card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama Kategori</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (data.length) { %>
+            <% for (var i = 0; i < data.length; i++) { %>
+              <tr>
+                <td class="text-muted"><%= i + 1 %></td>
+                <td class="fw-medium"><%= data[i].nama_kategori %></td>
+                <td>
+                  <a href="/kategori/edit/<%= data[i].id_kategori %>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="/kategori/delete/<%= data[i].id_kategori %>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                </td>
+              </tr>
+            <% } %>
+          <% } else { %>
+            <tr>
+              <td colspan="3">
+                <div class="empty-state">
+                  <p>Data kategori belum tersedia</p>
+                </div>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <%- include('../partials/_foot.ejs')%>

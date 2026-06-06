@@ -1,19 +1,26 @@
-<nav class="sidebar d-flex flex-column p-3 bg-white border-end shadow-sm">
-  <div class="mb-4">
-    <a href="/" class="text-decoration-none text-dark">
-      <span class="fs-5 fw-semibold">Dashboard</span>
-    </a>
-    <p class="small text-muted mt-1">Navigasi utama</p>
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <a href="/">Admin Panel</a>
+    <small>Express Basic</small>
   </div>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item mb-2">
-      <a href="/" class="nav-link btn btn-outline-primary text-start w-100">Beranda</a>
+  <ul class="sidebar-nav">
+    <li>
+      <a href="/">
+        <span class="nav-icon">&#9679;</span>
+        Beranda
+      </a>
     </li>
-    <li class="nav-item mb-2">
-      <a href="/kategori" class="nav-link btn btn-outline-primary text-start w-100">Kategori</a>
+    <li>
+      <a href="/kategori">
+        <span class="nav-icon">&#9632;</span>
+        Kategori
+      </a>
     </li>
-    <li class="nav-item mb-2">
-      <a href="/produk" class="nav-link btn btn-outline-primary text-start w-100">Produk</a>
+    <li>
+      <a href="/produk">
+        <span class="nav-icon">&#9641;</span>
+        Produk
+      </a>
     </li>
   </ul>
 </nav>

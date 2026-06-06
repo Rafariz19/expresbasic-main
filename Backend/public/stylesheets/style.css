@@ -1,39 +1,366 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: "Inter", system-ui, sans-serif;
-  background: #f6f8fb;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f7fa;
+  color: #1e293b;
   min-height: 100vh;
 }
 
+/* ── Sidebar ── */
 .sidebar {
-  width: 220px;
+  width: 240px;
   min-height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  background: #fff;
+  border-right: 1px solid #e9edf4;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
+.sidebar-brand {
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid #e9edf4;
+}
+
+.sidebar-brand a {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0a0f1c;
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.sidebar-brand small {
+  display: block;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 16px 12px;
+  flex: 1;
+}
+
+.sidebar-nav li {
+  margin-bottom: 4px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.sidebar-nav a:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.sidebar-nav a.active {
+  background: #0f172a;
+  color: #fff;
+}
+
+.sidebar-nav .nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* ── Page content ── */
 .page-content {
   margin-left: 240px;
-  padding: 40px;
+  padding: 32px 40px;
+  min-height: 100vh;
 }
 
-.hero-card {
+/* ── Cards ── */
+.card {
   border: none;
-  border-radius: 24px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
-.card-soft {
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 18px 24px;
+  border-radius: 14px 14px 0 0 !important;
+}
+
+.card-header h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.index-card .card-body {
+  min-height: 320px;
+}
+
+/* ── Tables ── */
+.table {
+  margin: 0;
+  font-size: 14px;
+}
+
+.table thead th {
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f8fafc;
+  color: #334155;
+}
+
+.table tbody tr:hover {
+  background: #fafbfc;
+}
+
+.table img {
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ── Buttons ── */
+.btn {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 7px 16px;
+  transition: all 0.15s ease;
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  background: #0f172a;
+  border-color: #0f172a;
+}
+
+.btn-primary:hover {
+  background: #1e293b;
+  border-color: #1e293b;
+}
+
+.btn-success {
+  background: #059669;
+  border-color: #059669;
+}
+
+.btn-success:hover {
+  background: #047857;
+  border-color: #047857;
+}
+
+.btn-warning {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #fff;
+}
+
+.btn-warning:hover {
+  background: #d97706;
+  border-color: #d97706;
+  color: #fff;
+}
+
+.btn-danger {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+  border-color: #dc2626;
 }
 
 .btn-outline-primary {
-  border-width: 2px;
+  border: 2px solid #e2e8f0;
+  color: #64748b;
+  background: transparent;
+  font-weight: 500;
 }
 
-a {
-  color: #0d6efd;
+.btn-outline-primary:hover {
+  border-color: #0f172a;
+  background: #0f172a;
+  color: #fff;
+}
+
+/* ── Forms ── */
+.form-control, .form-select {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  transition: all 0.15s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.form-text {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* ── Pagination ── */
+.pagination {
+  gap: 4px;
+}
+
+.page-link {
+  border: none;
+  border-radius: 8px !important;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  background: transparent;
+}
+
+.page-link:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.page-item.active .page-link {
+  background: #0f172a;
+  color: #fff;
+}
+
+/* ── Stats / info ── */
+.total-info {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ── Alerts ── */
+.alert {
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 12px 18px;
+}
+
+.alert-success {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.alert-danger {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* ── Images ── */
+.img-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #f1f5f9;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ── Delete page ── */
+.delete-info {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.delete-info dt {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.delete-info dd {
+  font-size: 15px;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.delete-info dd:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+  }
+
+  .page-content {
+    margin-left: 0;
+    padding: 24px 16px;
+  }
 }

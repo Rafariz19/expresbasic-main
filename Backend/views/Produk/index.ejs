@@ -1,83 +1,73 @@
 <%- include('../partials/_head.ejs')%>
-<div class="container mt-5">
-    <!-- Alert -->
 <%- include('../partials/_message.ejs')%>
-    <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Produk</h5>
-            <a href="/produk/create" class="btn btn-sm btn-success">
-                + Tambah Produk
-            </a>
-        </div>
 
-        <div class="card-body p-0">
-            <table class="table table-hover table-striped mb-0 text-center align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Nama Produk</th>
-                        <th>Harga</th>
-                        <th>Kategori</th>
-                        <th>Gambar</th>
-                        <th width="200">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (produk.length) { %>
-                        <% for (var i = 0; i < produk.length; i++) { %>
-                            <tr>
-                                <td><%= produk[i].no %></td>
-                                <td class="text-start"><%= produk[i].nama %></td>
-                                <td><%= produk[i].harga %></td>
-                                <td><%= produk[i].kategori %></td>
-                                <td>
-                                    <% if (produk[i].foto) { %>
-                                        <img src="<%= produk[i].foto %>" alt="Gambar Produk" class="img-fluid" style="max-height:80px; max-width:80px; object-fit:cover;">
-                                    <% } else { %>
-                                        <span class="text-muted">Tidak ada</span>
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <a href="/produk/edit/<%= produk[i].no %>" 
-                                       class="btn btn-sm btn-warning me-1">
-                                        Edit
-                                    </a>
-                                    <a href="/produk/delete/<%= produk[i].no %>" 
-                                       class="btn btn-sm btn-danger">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        <% } %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="6" class="text-muted py-4">
-                                Data produk belum tersedia
-                            </td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <% if (totalPages > 1) { %>
-    <nav aria-label="Pagination" class="mt-3">
-        <ul class="pagination justify-content-center">
-            <% for (let page = 1; page <= totalPages; page++) { %>
-            <li class="page-item <%= page === currentPage ? 'active' : '' %>">
-                <a class="page-link" href="?page=<%= page %>"><%= page %></a>
-            </li>
-            <% } %>
-        </ul>
-    </nav>
-    <% } %>
-
-    <div class="mt-3 text-center text-muted">
-        Total Data: <%= totalData %>
-    </div>
-
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold mb-0" style="font-size: 20px;">Produk</h4>
+  <a href="/produk/create" class="btn btn-success btn-sm">+ Tambah Produk</a>
 </div>
 
-<!-- Bootstrap JS -->
+<div class="card index-card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Kategori</th>
+            <th>Gambar</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (produk.length) { %>
+            <% for (var i = 0; i < produk.length; i++) { %>
+              <tr>
+                <td class="text-muted"><%= produk[i].no %></td>
+                <td class="fw-medium"><%= produk[i].nama %></td>
+                <td>Rp <%= Number(produk[i].harga).toLocaleString('id-ID') %></td>
+                <td><span class="badge bg-light text-dark"><%= produk[i].kategori %></span></td>
+                <td>
+                  <% if (produk[i].foto) { %>
+                    <img src="<%= produk[i].foto %>" alt="Gambar" class="img-thumb">
+                  <% } else { %>
+                    <span class="text-muted" style="font-size: 12px;">—</span>
+                  <% } %>
+                </td>
+                <td>
+                  <a href="/produk/edit/<%= produk[i].no %>" class="btn btn-sm btn-warning">Edit</a>
+                  <a href="/produk/delete/<%= produk[i].no %>" class="btn btn-sm btn-danger">Hapus</a>
+                </td>
+              </tr>
+            <% } %>
+          <% } else { %>
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <p>Data produk belum tersedia</p>
+                </div>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% if (totalPages > 1) { %>
+  <nav class="mt-4">
+    <ul class="pagination justify-content-center">
+      <% for (let page = 1; page <= totalPages; page++) { %>
+        <li class="page-item <%= page === currentPage ? 'active' : '' %>">
+          <a class="page-link" href="?page=<%= page %>"><%= page %></a>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+<% } %>
+
+<div class="text-center mt-3 total-info">Total Data: <%= totalData %></div>
+
 <%- include('../partials/_foot.ejs')%>
