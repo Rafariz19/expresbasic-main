@@ -30,12 +30,13 @@ app.use(session({
     secure: false,
     httpOnly: true,
     semeSite: 'strict',
+    // domainkitananti.com
   },
   store: new session.MemoryStore,
   saveUninitialized: true,
   resave: false,
   secret: 'secret'
-}))
+}));
 
 app.use(flash())
 

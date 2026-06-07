@@ -6,10 +6,16 @@ const model_kategori = require('../Model/model_kategori.js');
 router.get('/', async function(req, res, next) {
     let rows = await model_kategori.getAll();
 
-    res.render('kategori/index', {
-        title: 'Data Kategori',
-        data: rows
-    });
+    return res.status(200).json({
+      status: true,
+      message: 'Data kategori',
+      data: rows
+    })
+
+    // res.render('kategori/index', {
+    //     title: 'Data Kategori',
+    //     data: rows
+    // });
   });
   
   // GET create kategori
@@ -31,12 +37,16 @@ router.get('/edit/(:id)', async function(req, res, next) {
       })
   })
 
-// Delete kategori
-router.get('/delete/(:id)', async function(req, res){
+// Delete kategori (get)
+router.delete('/delete/(:id)', async function(req, res){
   try {
     let id = req.params.id;
     await model_kategori.delete(id);
-    req.flash('success','Data terhapus!');
+    return res.status(201).json({
+      status: true,
+      message: 'Data berhasil di hapus'
+    })
+    // req.flash('success','Data terhapus!');
   } catch (error) {
     req.flash('error', 'Gagal menghapus data');
   }
@@ -50,9 +60,12 @@ router.post('/store', async function (req, res, next) {
     let Data = {
       nama_kategori
     };  
-
     await model_kategori.Store(Data);
-    res.redirect('/kategori');
+    return res.status(201).json({
+      status: true,
+      message: 'Data Kategori berhasil di tambahkan'
+    })
+    // res.redirect('/kategori');
   } catch (error) {
     req.flash('error', 'Terjadi kesalahan pada fungsi');
     res.redirect('/kategori');
@@ -61,7 +74,7 @@ router.post('/store', async function (req, res, next) {
 
 
 // POST update kategori
-router.post('/update/:id', async function (req, res, next) {
+router.patch('/update/:id', async function (req, res, next) {
   try {
     let id = req.params.id;
     let {nama_kategori} = req.body;
@@ -70,11 +83,19 @@ router.post('/update/:id', async function (req, res, next) {
     };  
 
     await model_kategori.update(id, Data);
-    req.flash('succes', 'Berhasil mengupdate');
-    res.redirect('/kategori');
+    return res.status(201).json({
+      status: true,
+      message: 'Data kategori berhasil di perbarui'
+    })
+    // req.flash('succes', 'Berhasil mengupdate');
+    // res.redirect('/kategori');
   } catch (error) {
-    req.flash('error', 'Terjadi kesalahan pada fungsi');
-    res.redirect('/kategori');
+    return res.status(500).json({
+      status: true,
+      message: 'Terjadi kesalahan pada router'
+    })
+    // req.flash('error', 'Terjadi kesalahan pada fungsi');
+    // res.redirect('/kategori');
   }
 });
 

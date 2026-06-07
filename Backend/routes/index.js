@@ -3,7 +3,6 @@ var router = express.Router();
 
 const bcrypt = require('bcrypt');
 
-const model_produk = require('../Model/model_produk.js');
 var Model_Users = require('../Model/model_users.js');
 
 /* GET home page. */
