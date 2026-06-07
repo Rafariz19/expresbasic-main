@@ -3,7 +3,9 @@ var router = express.Router();
 const connection = require("../config/database.js");
 const model_kategori = require('../Model/model_kategori.js');
 
-router.get('/', async function(req, res, next) {
+var verifyToken = require('../config/middleware/jwt.js');
+
+router.get('/', verifyToken, async function(req, res, next) {
     let rows = await model_kategori.getAll();
 
     return res.status(200).json({
@@ -12,6 +14,7 @@ router.get('/', async function(req, res, next) {
       data: rows
     })
 
+    //1
     // res.render('kategori/index', {
     //     title: 'Data Kategori',
     //     data: rows

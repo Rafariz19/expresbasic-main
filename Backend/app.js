@@ -1,11 +1,23 @@
 var createError = require('http-errors');
 var express = require('express');
+
+var dotenv = require('dotenv');
+dotenv.config();
+
+var registerRouter = require('./routes/auth/register');
+var loginRouter = require('./routes/auth/login');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('express-flash');
 var session = require('express-session');
+
 const MemoryStore = require('session-memory-store')(session);
+
+const cors = require('cors')
+
+const {onlyDomain} = require('./config/middleware/corsOptions') 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +36,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api/register', registerRouter);
+app.use('/api/login', loginRouter);
+
 app.use(session({
   cookie: {
     maxAge: 60000000000,
@@ -39,6 +54,10 @@ app.use(session({
 }));
 
 app.use(flash())
+
+app.use(cors())
+
+app.use(cors(onlyDomain));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
